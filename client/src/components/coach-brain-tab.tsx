@@ -225,7 +225,7 @@ function PersonaSection() {
 
 export default function CoachBrainTab() {
   const pipelineSteps = [
-    { title: "Knowledge Base", icon: <Database className="w-6 h-6" /> },
+    { title: "Source Buckets", icon: <Database className="w-6 h-6" /> },
     { title: "Embedding + Retrieval", icon: <Search className="w-6 h-6" /> },
     { title: "Persona Forge", icon: <User className="w-6 h-6" /> },
     { title: "Output Renderer", icon: <Zap className="w-6 h-6" /> }
@@ -266,6 +266,7 @@ export default function CoachBrainTab() {
           </div>
         </CardContent>
       </Card>
+
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
@@ -275,7 +276,9 @@ export default function CoachBrainTab() {
             <CardContent className="p-6">
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-navy mb-2">Braintrust Knowledge</h3>
-                <p className="text-gray-600 text-sm">Hover over each bucket to see the source of Coach AI's brain power</p>
+                <p className="text-gray-600 text-sm">
+                  Hover over each bucket to see detailed statistics and data sources
+                </p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-8">
