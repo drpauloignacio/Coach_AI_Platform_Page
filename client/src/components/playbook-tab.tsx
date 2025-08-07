@@ -5,20 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { UserRole, LifeStage } from "@shared/types";
 
-interface Task {
-  id: string;
-  icon: string;
-  taskTitle: string;
-  xpPoints: number;
-  avgCompletionMin: number;
-  categoryColor: string;
-  category: string;
-  whatsappMessage: string;
-  goal: string;
-  whyItMatters: string;
-  lifeYearsCredit: string;
-}
+// Import Task interface from shared types
+import type { Task } from "@shared/types";
 
 const categories = [
   { id: "all", label: "All Tasks", color: "bg-gray-500", borderColor: "#6b7280" },
@@ -57,7 +47,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Hi there! 👋 It's time to show some love through food. Cook her favorite meal or order from that restaurant she mentioned. When she doesn't have to think about dinner, it's one less decision in her already full day. Food = love! 🍲💕",
     goal: "Reduce meal planning stress and provide nutritional support",
     whyItMatters: "Taking meal decisions off a mother's plate gives her mental space and ensures proper nutrition.",
-    lifeYearsCredit: "+0.2 years from reduced decision fatigue and better nutrition"
+    lifeYearsCredit: "+0.2 years from reduced decision fatigue and better nutrition",
+    targetRole: "father" as UserRole,
+    lifeStage: "0-6m" as LifeStage,
   },
   {
     id: "2", 
@@ -70,7 +62,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Time for the ultimate gift: SPACE! 🌟 Take the kids for an hour. Tell her to take a bath, nap, read, or just stare at the wall. No agenda, no guilt. Just pure, uninterrupted time to breathe. She needs this more than she'll admit. 🛁✨",
     goal: "Provide mental restoration and stress relief",
     whyItMatters: "Alone time allows mothers to decompress and recharge, preventing burnout.",
-    lifeYearsCredit: "+0.3 years from reduced chronic stress"
+    lifeYearsCredit: "+0.3 years from reduced chronic stress",
+    targetRole: "family_friend" as UserRole,
+    lifeStage: "6-12m" as LifeStage,
   },
   {
     id: "3",
@@ -83,7 +77,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Bedtime hero activated! 🦸‍♂️ Tonight, YOU'RE doing the bedtime routine. Baths, stories, teeth brushing, the works. Let her relax downstairs with tea or whatever makes her happy. Quality sleep for kids = peace of mind for mama! 🧸💤",
     goal: "Ensure children's sleep needs are met while giving mother a break",
     whyItMatters: "When kids sleep well consistently, it reduces maternal stress and improves family dynamics.",
-    lifeYearsCredit: "+0.2 years from improved sleep quality for the whole family"
+    lifeYearsCredit: "+0.2 years from improved sleep quality for the whole family",
+    targetRole: "father" as UserRole,
+    lifeStage: "12-24m" as LifeStage,
   },
   {
     id: "4",
@@ -96,7 +92,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Cleaning fairy duties! 🧚‍♀️ Pick ONE task she's been putting off - maybe it's the bathroom, kitchen deep clean, or laundry mountain. Don't announce it, just do it. She'll notice, and that mental load will lift a little. Small acts, big impact! 🧹✨",
     goal: "Reduce household management burden",
     whyItMatters: "Taking care of household tasks reduces the invisible mental load mothers carry.",
-    lifeYearsCredit: "+0.1 years from reduced domestic stress"
+    lifeYearsCredit: "+0.1 years from reduced domestic stress",
+    targetRole: "family_friend" as UserRole,
+    lifeStage: "24m+" as LifeStage,
   },
   {
     id: "5",
@@ -109,7 +107,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Time to be her emotional support human! 💕 Ask 'How are you REALLY doing?' and then just listen. No solutions, no advice unless asked. Sometimes she just needs someone to hear her thoughts without judgment. Your ears are the gift! 👂❤️",
     goal: "Provide emotional support and validation",
     whyItMatters: "Feeling heard and understood is crucial for mental health and relationship strength.",
-    lifeYearsCredit: "+0.2 years from improved emotional well-being"
+    lifeYearsCredit: "+0.2 years from improved emotional well-being",
+    targetRole: "father" as UserRole,
+    lifeStage: "pregnancy" as LifeStage,
   },
   {
     id: "6",
@@ -122,7 +122,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Surprise mission! 🕵️‍♂️ It doesn't have to be big - her favorite coffee, flowers from the grocery store, or even just a heartfelt note. The point is showing you see her and appreciate all she does. Small gestures, huge heart impact! 🎁💝",
     goal: "Show appreciation and recognition",
     whyItMatters: "Regular appreciation helps mothers feel valued and boosts their emotional well-being.",
-    lifeYearsCredit: "+0.1 years from improved self-worth and relationship satisfaction"
+    lifeYearsCredit: "+0.1 years from improved self-worth and relationship satisfaction",
+    targetRole: "fan" as UserRole,
+    lifeStage: "0-6m" as LifeStage,
   },
   {
     id: "7",
@@ -135,7 +137,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Errand angel reporting for duty! 😇 Grocery shopping, pharmacy, dry cleaning, whatever's on her list. Take it ALL off her plate today. Bonus points if you remember the specific brand of everything! One less trip = more time for what matters. 🚗✅",
     goal: "Reduce logistical burden and save time",
     whyItMatters: "Managing errands takes significant time and mental energy away from family connection.",
-    lifeYearsCredit: "+0.1 years from reduced daily stress"
+    lifeYearsCredit: "+0.1 years from reduced daily stress",
+    targetRole: "family_friend" as UserRole,
+    lifeStage: "6-12m" as LifeStage,
   },
   {
     id: "8",
@@ -148,7 +152,9 @@ const mockTasks: Task[] = [
     whatsappMessage: "Text magic time! ✨ Send her something uplifting right now. 'You're doing an amazing job' or 'The kids are lucky to have you' or 'I see how hard you're working.' Sometimes she needs to hear it from someone who sees her daily efforts. 📱💕",
     goal: "Provide daily affirmation and emotional boost",
     whyItMatters: "Regular positive reinforcement helps combat the isolation and self-doubt many mothers experience.",
-    lifeYearsCredit: "+0.1 years from improved mental health support"
+    lifeYearsCredit: "+0.1 years from improved mental health support",
+    targetRole: "father" as UserRole,
+    lifeStage: "12-24m" as LifeStage,
   }
 ];
 
