@@ -5,15 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Tier {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  pointsRequired: number;
-  color: string;
-  bgColor: string;
-  unlocked: boolean;
-}
+
 
 interface Reward {
   id: string;
@@ -32,83 +24,71 @@ interface VideoTestimonial {
   author: string;
 }
 
-const tiers: Tier[] = [
-  {
-    id: 'bronze',
-    name: 'Bronze Supporter',
-    icon: <Award className="w-8 h-8" />,
-    pointsRequired: 0,
-    color: '#CD7F32',
-    bgColor: 'bg-orange-100',
-    unlocked: true
-  },
-  {
-    id: 'silver',
-    name: 'Silver Champion',
-    icon: <Star className="w-8 h-8" />,
-    pointsRequired: 500,
-    color: '#C0C0C0',
-    bgColor: 'bg-gray-100',
-    unlocked: true
-  },
-  {
-    id: 'gold',
-    name: 'Gold Legend',
-    icon: <Trophy className="w-8 h-8" />,
-    pointsRequired: 1000,
-    color: '#FFD700',
-    bgColor: 'bg-yellow-100',
-    unlocked: false
-  }
-];
+
 
 const rewards: Reward[] = [
   {
     id: '1',
-    title: 'Team Jersey - Home Kit',
-    image: '👕',
+    title: 'Brazil Home Jersey #10',
+    image: '🇧🇷',
     pointsNeeded: 250,
-    claimedPercentage: 73,
+    claimedPercentage: 89,
     category: 'Apparel'
   },
   {
     id: '2',
-    title: 'VIP Match Tickets',
+    title: 'Maracanã Stadium VIP Tickets',
     image: '🎫',
     pointsNeeded: 800,
-    claimedPercentage: 45,
+    claimedPercentage: 67,
     category: 'Experience'
   },
   {
     id: '3',
-    title: 'Signed Soccer Ball',
+    title: 'Pelé Signed Soccer Ball',
     image: '⚽',
-    pointsNeeded: 400,
-    claimedPercentage: 62,
+    pointsNeeded: 1200,
+    claimedPercentage: 45,
     category: 'Collectible'
   },
   {
     id: '4',
-    title: 'Stadium Tour Package',
+    title: 'Canarinho Training Camp Access',
     image: '🏟️',
     pointsNeeded: 600,
-    claimedPercentage: 38,
+    claimedPercentage: 73,
     category: 'Experience'
   },
   {
     id: '5',
-    title: 'Player Meet & Greet',
+    title: 'Meet Ronaldinho & Kaká',
     image: '⭐',
-    pointsNeeded: 1200,
-    claimedPercentage: 29,
+    pointsNeeded: 1500,
+    claimedPercentage: 34,
     category: 'Exclusive'
   },
   {
     id: '6',
-    title: 'Training Session Access',
-    image: '🏃‍♂️',
+    title: 'World Cup Trophy Replica',
+    image: '🏆',
+    pointsNeeded: 900,
+    claimedPercentage: 52,
+    category: 'Collectible'
+  },
+  {
+    id: '7',
+    title: 'Brazil Away Jersey - Vintage',
+    image: '💙',
     pointsNeeded: 350,
-    claimedPercentage: 56,
+    claimedPercentage: 78,
+    category: 'Apparel'
+  },
+  {
+    id: '8',
+    title: 'Rio Beach Football Experience',
+    image: '🏖️',
+    pointsNeeded: 450,
+    claimedPercentage: 61,
     category: 'Experience'
   }
 ];
@@ -144,82 +124,7 @@ const videoTestimonials: VideoTestimonial[] = [
   }
 ];
 
-// Stadium Lights Animation Component
-const StadiumLights = ({ isActive }: { isActive: boolean }) => {
-  return (
-    <div className="flex space-x-1 mb-2">
-      {[...Array(5)].map((_, i) => (
-        <motion.div
-          key={i}
-          className={`w-2 h-2 rounded-full ${isActive ? 'bg-yellow-400' : 'bg-gray-300'}`}
-          animate={isActive ? {
-            opacity: [0.3, 1, 0.3],
-            scale: [0.8, 1.2, 0.8]
-          } : {}}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            delay: i * 0.2
-          }}
-        />
-      ))}
-    </div>
-  );
-};
 
-// Progress Ladder Component
-const ProgressLadder = () => {
-  const currentPoints = 650; // User's current points
-  
-  return (
-    <div className="bg-gradient-to-r from-navy to-navy-light rounded-xl p-8 text-white mb-8">
-      <h2 className="text-2xl font-bold text-center mb-8">Supporter Tiers</h2>
-      
-      <div className="flex items-center justify-between max-w-4xl mx-auto">
-        {tiers.map((tier, index) => (
-          <div key={tier.id} className="flex flex-col items-center relative">
-            {/* Stadium Lights */}
-            <StadiumLights isActive={tier.unlocked} />
-            
-            {/* Tier Icon */}
-            <motion.div
-              className={`w-20 h-20 rounded-full flex items-center justify-center ${tier.bgColor} ${
-                tier.unlocked ? 'ring-4 ring-white' : 'opacity-50'
-              }`}
-              style={{ color: tier.color }}
-              animate={tier.unlocked ? { scale: [1, 1.1, 1] } : {}}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              {tier.icon}
-            </motion.div>
-            
-            {/* Tier Info */}
-            <div className="text-center mt-4">
-              <h3 className="font-semibold text-lg">{tier.name}</h3>
-              <p className="text-sm opacity-75">{tier.pointsRequired} pts</p>
-              {currentPoints >= tier.pointsRequired && (
-                <Badge className="mt-2 bg-green-500">Unlocked</Badge>
-              )}
-            </div>
-            
-            {/* Connection Line */}
-            {index < tiers.length - 1 && (
-              <div className="absolute top-10 left-20 w-32 h-1 bg-white opacity-30" />
-            )}
-          </div>
-        ))}
-      </div>
-      
-      {/* Current Points */}
-      <div className="text-center mt-8">
-        <p className="text-xl">Current Points: <span className="font-bold text-gold">{currentPoints}</span></p>
-        <p className="text-sm opacity-75">
-          {1000 - currentPoints} points to Gold Legend
-        </p>
-      </div>
-    </div>
-  );
-};
 
 // Reward Carousel Component
 const RewardCarousel = () => {
@@ -249,40 +154,37 @@ const RewardCarousel = () => {
     >
       <h3 className="text-xl font-bold text-navy mb-4">Available Rewards</h3>
       
-      <div className="flex space-x-6 overflow-hidden">
-        <AnimatePresence mode="wait">
-          {visibleRewards.map((reward, index) => (
-            <motion.div
-              key={`${reward.id}-${currentIndex}`}
-              initial={{ opacity: 0, x: 300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex-1"
-            >
-              <Card className="relative overflow-hidden hover:shadow-lg transition-shadow">
-                {/* Claimed Percentage Ribbon */}
-                <div className="absolute top-2 right-2 z-10">
-                  <Badge className="bg-gold text-navy">
-                    {reward.claimedPercentage}% claimed
-                  </Badge>
-                </div>
-                
-                <CardContent className="p-6">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">{reward.image}</div>
-                    <h4 className="font-semibold text-lg mb-2">{reward.title}</h4>
-                    <p className="text-sm text-gray-600 mb-3">{reward.category}</p>
-                    <div className="flex items-center justify-center space-x-2">
-                      <Star className="w-4 h-4 text-gold" />
-                      <span className="font-bold text-navy">{reward.pointsNeeded} pts</span>
-                    </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {visibleRewards.map((reward, index) => (
+          <motion.div
+            key={`${reward.id}-${currentIndex}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="w-full"
+          >
+            <Card className="relative overflow-hidden hover:shadow-lg transition-shadow">
+              {/* Claimed Percentage Ribbon */}
+              <div className="absolute top-2 right-2 z-10">
+                <Badge className="bg-gold text-navy">
+                  {reward.claimedPercentage}% claimed
+                </Badge>
+              </div>
+              
+              <CardContent className="p-6">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">{reward.image}</div>
+                  <h4 className="font-semibold text-lg mb-2">{reward.title}</h4>
+                  <p className="text-sm text-gray-600 mb-3">{reward.category}</p>
+                  <div className="flex items-center justify-center space-x-2">
+                    <Star className="w-4 h-4 text-gold" />
+                    <span className="font-bold text-navy">{reward.pointsNeeded} pts</span>
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
       </div>
       
       {/* Carousel Indicators */}
@@ -424,8 +326,11 @@ export default function RewardsTab() {
   
   return (
     <div className="space-y-8">
-      {/* Progress Ladder */}
-      <ProgressLadder />
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-navy mb-4">Brazil National Team Rewards</h1>
+        <p className="text-lg text-gray-600">Earn points by supporting mothers and unlock exclusive Brazil-themed rewards</p>
+      </div>
       
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
