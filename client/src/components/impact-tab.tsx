@@ -61,47 +61,47 @@ const testimonials: Testimonial[] = [
 // Gauge component for Active Supporters
 const GaugeMeter = ({ value, max, label }: { value: number; max: number; label: string }) => {
   const percentage = (value / max) * 100;
-  const angle = (percentage / 100) * 180 - 90;
+  const angle = -90 + (percentage / 100) * 180;
   
   return (
-    <div className="relative w-48 h-24 mx-auto">
-      <svg viewBox="0 0 200 100" className="w-full h-full">
+    <div className="relative w-40 h-20 mx-auto">
+      <svg viewBox="0 0 160 80" className="w-full h-full">
         {/* Background arc */}
         <path
-          d="M 20 80 A 80 80 0 0 1 180 80"
+          d="M 20 60 A 60 60 0 0 1 140 60"
           fill="none"
           stroke="#e5e7eb"
-          strokeWidth="12"
+          strokeWidth="8"
           strokeLinecap="round"
         />
         {/* Progress arc */}
         <motion.path
-          d="M 20 80 A 80 80 0 0 1 180 80"
+          d="M 20 60 A 60 60 0 0 1 140 60"
           fill="none"
           stroke="#C9A34E"
-          strokeWidth="12"
+          strokeWidth="8"
           strokeLinecap="round"
-          strokeDasharray="251.2"
-          initial={{ strokeDashoffset: 251.2 }}
-          animate={{ strokeDashoffset: 251.2 - (251.2 * percentage) / 100 }}
+          strokeDasharray="188.4"
+          initial={{ strokeDashoffset: 188.4 }}
+          animate={{ strokeDashoffset: 188.4 - (188.4 * percentage) / 100 }}
           transition={{ duration: 2, ease: "easeOut" }}
         />
         {/* Needle */}
         <motion.line
-          x1="100"
-          y1="80"
-          x2="100"
-          y2="20"
+          x1="80"
+          y1="60"
+          x2="80"
+          y2="25"
           stroke="#0B0E2C"
-          strokeWidth="3"
+          strokeWidth="2"
           strokeLinecap="round"
-          style={{ transformOrigin: '100px 80px' }}
+          style={{ transformOrigin: '80px 60px' }}
           initial={{ rotate: -90 }}
           animate={{ rotate: angle }}
           transition={{ duration: 2, ease: "easeOut" }}
         />
         {/* Center dot */}
-        <circle cx="100" cy="80" r="4" fill="#0B0E2C" />
+        <circle cx="80" cy="60" r="3" fill="#0B0E2C" />
       </svg>
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-center">
         <div className="text-2xl font-bold text-navy">{value}</div>
@@ -297,7 +297,7 @@ export default function ImpactTab() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-80 flex flex-col justify-center"
           >
             <h3 className="text-lg font-semibold text-navy mb-4 text-center">Active Supporters per Mother</h3>
             <GaugeMeter value={7.3} max={10} label="per mother" />
@@ -350,15 +350,17 @@ export default function ImpactTab() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-80 flex flex-col"
           >
-            <div className="flex items-start space-x-6">
+            <div className="flex items-start space-x-6 h-full">
               <div className="flex-shrink-0">
                 <NPSDial score={92} />
               </div>
-              <div className="flex-1">
+              <div className="flex-1 flex flex-col">
                 <h3 className="text-lg font-semibold text-navy mb-2">User Satisfaction</h3>
-                <TestimonialCarousel />
+                <div className="flex-1">
+                  <TestimonialCarousel />
+                </div>
               </div>
             </div>
           </motion.div>
