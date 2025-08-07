@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Sidebar from "@/components/layout/sidebar";
 import DataEngineTab from "@/components/data-engine-tab";
+import CoachBrainTab from "@/components/coach-brain-tab";
 
 const tabItems = [
   { id: "data-engine", label: "Data Engine", icon: "🔍" },
@@ -131,8 +132,12 @@ export default function CoachAIPage() {
                   <DataEngineTab />
                 </TabsContent>
 
+                <TabsContent value="coach-brain" className="mt-6">
+                  <CoachBrainTab />
+                </TabsContent>
+
                 {/* Other tab contents */}
-                {tabItems.slice(1).map((tab) => (
+                {tabItems.slice(2).map((tab) => (
                   <TabsContent key={tab.id} value={tab.id} className="mt-6">
                     <Card className="p-8 text-center">
                       <div className="text-6xl mb-4">{tab.icon}</div>

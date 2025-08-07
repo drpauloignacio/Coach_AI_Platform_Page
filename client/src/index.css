@@ -156,3 +156,20 @@
 .hover\:text-gold-light:hover {
   color: var(--gold-light);
 }
+
+/* 3D Flip Card Effects */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
