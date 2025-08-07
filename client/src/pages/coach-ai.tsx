@@ -10,6 +10,7 @@ import DataEngineTab from "@/components/data-engine-tab";
 import CoachBrainTab from "@/components/coach-brain-tab";
 import PlaybookTab from "@/components/playbook-tab";
 import ImpactTab from "@/components/impact-tab";
+import ConversationsTab from "@/components/conversations-tab";
 
 const tabItems = [
   { id: "data-engine", label: "Data Engine", icon: "🔍" },
@@ -89,8 +90,12 @@ export default function CoachAIPage() {
                   <ImpactTab />
                 </TabsContent>
 
+                <TabsContent value="conversations" className="mt-6">
+                  <ConversationsTab />
+                </TabsContent>
+
                 {/* Other tab contents */}
-                {tabItems.slice(4).map((tab) => (
+                {tabItems.slice(5).map((tab) => (
                   <TabsContent key={tab.id} value={tab.id} className="mt-6">
                     <Card className="p-8 text-center">
                       <div className="text-6xl mb-4">{tab.icon}</div>
