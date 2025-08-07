@@ -114,13 +114,35 @@ function PipelineStep({ title, icon, delay }: { title: string; icon: React.React
 }
 
 function PersonaSection() {
-  const persona = {
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    name: "Coach AI",
-    tone: ["Supportive", "Empathetic", "Evidence-based"],
-    languages: ["English", "Spanish", "Portuguese"],
-    safetyFilters: ["Age-appropriate", "Medically reviewed", "Cultural sensitivity"]
+  const [selectedCoach, setSelectedCoach] = useState("guardiola");
+
+  const coachingStyles = {
+    guardiola: {
+      name: "Pep Guardiola Style",
+      avatar: "⚽",
+      description: "Tactical precision, positional play",
+      tone: ["Methodical", "Detailed", "Patient"],
+      approach: "Systematic guidance with step-by-step analysis"
+    },
+    ancelotti: {
+      name: "Carlo Ancelotti Style", 
+      avatar: "🎯",
+      description: "Calm leadership, adaptive strategy",
+      tone: ["Calm", "Flexible", "Experienced"],
+      approach: "Balanced support adapting to individual needs"
+    },
+    mourinho: {
+      name: "José Mourinho Style",
+      avatar: "🔥", 
+      description: "Motivational intensity, results-focused",
+      tone: ["Direct", "Motivating", "Confident"],
+      approach: "High-energy motivation with clear objectives"
+    }
   };
+
+  const currentCoach = coachingStyles[selectedCoach];
+  const languages = ["English", "Spanish", "Portuguese"];
+  const safetyFilters = ["Age-appropriate", "Medically reviewed", "Cultural sensitivity"];
 
   return (
     <motion.div
@@ -129,25 +151,48 @@ function PersonaSection() {
       transition={{ delay: 1, duration: 0.6 }}
       className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
     >
-      <h3 className="text-lg font-bold text-navy mb-4">Active Persona</h3>
+      <h3 className="text-lg font-bold text-navy mb-4">Coaching Style</h3>
       
-      <div className="flex flex-col items-center mb-6">
-        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-gold mb-3">
-          <img 
-            src={persona.avatar}
-            alt="Coach Avatar"
-            className="w-full h-full object-cover"
-          />
+      {/* Coach Style Selector */}
+      <div className="mb-4">
+        <div className="flex flex-col gap-2">
+          {Object.entries(coachingStyles).map(([key, coach]) => (
+            <div
+              key={key}
+              onClick={() => setSelectedCoach(key)}
+              className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                selectedCoach === key 
+                  ? 'border-gold bg-gold/10' 
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">{coach.avatar}</span>
+                  <div>
+                    <div className="font-semibold text-sm text-navy">{coach.name}</div>
+                    <div className="text-xs text-gray-600">{coach.description}</div>
+                  </div>
+                </div>
+                {selectedCoach === key && (
+                  <Badge variant="outline" className="text-xs">Active</Badge>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
-        <h4 className="font-semibold text-navy">{persona.name}</h4>
-        <Badge variant="outline" className="text-xs mt-1">Active</Badge>
       </div>
 
       <div className="space-y-4">
         <div>
-          <h5 className="text-sm font-semibold text-gray-700 mb-2">Tone</h5>
+          <h5 className="text-sm font-semibold text-gray-700 mb-2">Coaching Approach</h5>
+          <p className="text-xs text-gray-600 bg-gray-50 p-2 rounded">{currentCoach.approach}</p>
+        </div>
+
+        <div>
+          <h5 className="text-sm font-semibold text-gray-700 mb-2">Communication Style</h5>
           <div className="flex flex-wrap gap-1">
-            {persona.tone.map((item, index) => (
+            {currentCoach.tone.map((item, index) => (
               <Badge key={index} variant="secondary" className="text-xs">
                 {item}
               </Badge>
@@ -158,7 +203,7 @@ function PersonaSection() {
         <div>
           <h5 className="text-sm font-semibold text-gray-700 mb-2">Languages</h5>
           <div className="flex flex-wrap gap-1">
-            {persona.languages.map((lang, index) => (
+            {languages.map((lang, index) => (
               <Badge key={index} variant="outline" className="text-xs">
                 {lang}
               </Badge>
@@ -169,7 +214,7 @@ function PersonaSection() {
         <div>
           <h5 className="text-sm font-semibold text-gray-700 mb-2">Safety Filters</h5>
           <div className="space-y-1">
-            {persona.safetyFilters.map((filter, index) => (
+            {safetyFilters.map((filter, index) => (
               <div key={index} className="flex items-center text-xs text-gray-600">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
                 {filter}
