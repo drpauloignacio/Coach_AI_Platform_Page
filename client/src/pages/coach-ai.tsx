@@ -48,28 +48,8 @@ export default function CoachAIPage() {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navigation */}
         <header className="bg-white border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <h1 className="text-2xl font-bold text-navy">Coach AI</h1>
-              <nav className="hidden md:flex space-x-6">
-                <a href="#" className="text-sm font-medium text-gray-700 hover:text-navy transition-colors">WC OF HEALING</a>
-                <a href="#" className="text-sm font-medium text-gray-700 hover:text-navy transition-colors">PRODUCT</a>
-                <a href="#" className="text-sm font-medium text-gray-700 hover:text-navy transition-colors">SCRIPTS</a>
-                <a href="#" className="text-sm font-medium text-gray-700 hover:text-navy transition-colors">LEARNING</a>
-                <a href="#" className="text-sm font-medium text-gray-700 hover:text-navy transition-colors">RESEARCH</a>
-              </nav>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon">
-                <Search className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Bell className="w-5 h-5" />
-              </Button>
-              <div className="w-8 h-8 bg-navy rounded-full flex items-center justify-center text-white text-sm font-medium">
-                W
-              </div>
-            </div>
+          <div className="flex items-center">
+            <h1 className="text-2xl font-bold text-navy">Coach AI</h1>
           </div>
         </header>
 
