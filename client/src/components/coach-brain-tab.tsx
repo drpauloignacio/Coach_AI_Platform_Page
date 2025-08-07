@@ -60,7 +60,7 @@ function FlipCard({ bucket, delay }: FlipCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
-      className="relative w-48 h-32 cursor-pointer"
+      className="relative w-48 h-40 cursor-pointer"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
@@ -76,18 +76,7 @@ function FlipCard({ bucket, delay }: FlipCardProps) {
 
         {/* Back Card */}
         <Card className={`absolute inset-0 backface-hidden bg-navy text-white shadow-md transition-transform duration-500 ${isFlipped ? '' : 'rotate-y-180'}`}>
-          <CardContent className="flex flex-col justify-between h-full p-4">
-            <div>
-              <div className="text-2xl font-bold text-gold mb-1">
-                {bucket.recordCount.toLocaleString()}
-              </div>
-              <div className="text-xs text-gray-300 mb-3">records</div>
-              
-              <div className="text-xs text-gray-400 mb-2">
-                Updated {bucket.lastUpdated}
-              </div>
-            </div>
-            
+          <CardContent className="flex flex-col justify-center h-full p-4">
             <div className="text-xs text-gray-300 text-center leading-relaxed">
               {bucket.trainingDescription}
             </div>
