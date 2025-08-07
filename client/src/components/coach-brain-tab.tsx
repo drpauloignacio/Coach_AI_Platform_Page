@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Database, Search, User, Zap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import guardiola from "@assets/generated_images/Pep_Guardiola_coaching_portrait_fd0a5837.png";
+import ancelotti from "@assets/generated_images/Carlo_Ancelotti_coaching_portrait_519941e0.png";
+import mourinho from "@assets/generated_images/José_Mourinho_coaching_portrait_f1df2036.png";
 
 interface BucketData {
   id: string;
@@ -119,28 +122,28 @@ function PersonaSection() {
   const coachingStyles = {
     guardiola: {
       name: "Pep Guardiola Style",
-      avatar: "⚽",
+      avatar: guardiola,
       description: "Tactical precision, positional play",
       tone: ["Methodical", "Detailed", "Patient"],
       approach: "Systematic guidance with step-by-step analysis"
     },
     ancelotti: {
       name: "Carlo Ancelotti Style", 
-      avatar: "🎯",
+      avatar: ancelotti,
       description: "Calm leadership, adaptive strategy",
       tone: ["Calm", "Flexible", "Experienced"],
       approach: "Balanced support adapting to individual needs"
     },
     mourinho: {
       name: "José Mourinho Style",
-      avatar: "🔥", 
+      avatar: mourinho, 
       description: "Motivational intensity, results-focused",
       tone: ["Direct", "Motivating", "Confident"],
       approach: "High-energy motivation with clear objectives"
     }
-  };
+  } as const;
 
-  const currentCoach = coachingStyles[selectedCoach];
+  const currentCoach = coachingStyles[selectedCoach as keyof typeof coachingStyles];
   const languages = ["English", "Spanish", "Portuguese"];
   const safetyFilters = ["Age-appropriate", "Medically reviewed", "Cultural sensitivity"];
 
@@ -167,8 +170,14 @@ function PersonaSection() {
               }`}
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">{coach.avatar}</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                    <img 
+                      src={coach.avatar}
+                      alt={coach.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div>
                     <div className="font-semibold text-sm text-navy">{coach.name}</div>
                     <div className="text-xs text-gray-600">{coach.description}</div>
