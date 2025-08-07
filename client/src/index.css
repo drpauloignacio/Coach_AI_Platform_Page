@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 25%, 7.8431%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(210, 25%, 7.8431%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 25%, 7.8431%);
+  --primary: hsl(213, 87%, 22%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(40, 46%, 51%);
+  --secondary-foreground: hsl(213, 87%, 22%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215, 16%, 47%);
+  --accent: hsl(210, 40%, 96%);
+  --accent-foreground: hsl(213, 87%, 22%);
+  --destructive: hsl(356, 91%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --ring: hsl(213, 87%, 22%);
+  --chart-1: hsl(213, 87%, 22%);
+  --chart-2: hsl(159, 100%, 36%);
+  --chart-3: hsl(42, 93%, 56%);
+  --chart-4: hsl(147, 79%, 42%);
+  --chart-5: hsl(341, 75%, 51%);
+  --sidebar: hsl(0, 0%, 100%);
+  --sidebar-foreground: hsl(210, 25%, 7.8431%);
+  --sidebar-primary: hsl(213, 87%, 22%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(210, 40%, 96%);
+  --sidebar-accent-foreground: hsl(213, 87%, 22%);
+  --sidebar-border: hsl(214, 32%, 91%);
+  --sidebar-ring: hsl(213, 87%, 22%);
+  --font-sans: Inter, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+  --navy: hsl(221, 52%, 12%);
+  --navy-light: hsl(221, 47%, 20%);
+  --gold: hsl(40, 46%, 51%);
+  --gold-light: hsl(40, 41%, 60%);
+  --shadow-2xs: 0px 1px 2px 0px hsl(0, 0%, 0%, 0.05);
+  --shadow-xs: 0px 1px 2px 0px hsl(0, 0%, 0%, 0.05);
+  --shadow-sm: 0px 1px 2px 0px hsl(0, 0%, 0%, 0.05), 0px 1px 3px 0px hsl(0, 0%, 0%, 0.1);
+  --shadow: 0px 1px 2px 0px hsl(0, 0%, 0%, 0.05), 0px 1px 3px 0px hsl(0, 0%, 0%, 0.1);
+  --shadow-md: 0px 4px 6px -1px hsl(0, 0%, 0%, 0.1), 0px 2px 4px -1px hsl(0, 0%, 0%, 0.06);
+  --shadow-lg: 0px 10px 15px -3px hsl(0, 0%, 0%, 0.1), 0px 4px 6px -2px hsl(0, 0%, 0%, 0.05);
+  --shadow-xl: 0px 20px 25px -5px hsl(0, 0%, 0%, 0.1), 0px 10px 10px -5px hsl(0, 0%, 0%, 0.04);
+  --shadow-2xl: 0px 25px 50px -12px hsl(0, 0%, 0%, 0.25);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: hsl(221, 52%, 12%);
+  --foreground: hsl(210, 40%, 92%);
+  --card: hsl(221, 47%, 20%);
+  --card-foreground: hsl(210, 40%, 92%);
+  --popover: hsl(221, 52%, 12%);
+  --popover-foreground: hsl(210, 40%, 92%);
+  --primary: hsl(40, 46%, 51%);
+  --primary-foreground: hsl(221, 52%, 12%);
+  --secondary: hsl(221, 47%, 20%);
+  --secondary-foreground: hsl(210, 40%, 92%);
+  --muted: hsl(221, 47%, 16%);
+  --muted-foreground: hsl(215, 16%, 57%);
+  --accent: hsl(221, 47%, 16%);
+  --accent-foreground: hsl(210, 40%, 92%);
+  --destructive: hsl(356, 91%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(221, 47%, 20%);
+  --input: hsl(221, 47%, 20%);
+  --ring: hsl(40, 46%, 51%);
+  --chart-1: hsl(40, 46%, 51%);
+  --chart-2: hsl(159, 100%, 36%);
+  --chart-3: hsl(42, 93%, 56%);
+  --chart-4: hsl(147, 79%, 42%);
+  --chart-5: hsl(341, 75%, 51%);
+  --sidebar: hsl(221, 47%, 20%);
+  --sidebar-foreground: hsl(210, 40%, 92%);
+  --sidebar-primary: hsl(40, 46%, 51%);
+  --sidebar-primary-foreground: hsl(221, 52%, 12%);
+  --sidebar-accent: hsl(221, 47%, 16%);
+  --sidebar-accent-foreground: hsl(40, 46%, 51%);
+  --sidebar-border: hsl(221, 47%, 30%);
+  --sidebar-ring: hsl(40, 46%, 51%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Custom utility classes for navy and gold theme */
+.bg-navy {
+  background-color: var(--navy);
+}
+
+.bg-navy-light {
+  background-color: var(--navy-light);
+}
+
+.bg-gold {
+  background-color: var(--gold);
+}
+
+.bg-gold-light {
+  background-color: var(--gold-light);
+}
+
+.text-navy {
+  color: var(--navy);
+}
+
+.text-navy-light {
+  color: var(--navy-light);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.text-gold-light {
+  color: var(--gold-light);
+}
+
+.border-navy {
+  border-color: var(--navy);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+.hover\:bg-navy-light:hover {
+  background-color: var(--navy-light);
+}
+
+.hover\:bg-gold-light:hover {
+  background-color: var(--gold-light);
+}
+
+.hover\:text-navy:hover {
+  color: var(--navy);
+}
+
+.hover\:text-gold-light:hover {
+  color: var(--gold-light);
+}
