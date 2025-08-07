@@ -39,9 +39,9 @@
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
   --radius: 0.75rem;
-  --navy: hsl(221, 52%, 12%);
+  --navy: #0B0E2C;
   --navy-light: hsl(221, 47%, 20%);
-  --gold: hsl(40, 46%, 51%);
+  --gold: #C9A34E;
   --gold-light: hsl(40, 41%, 60%);
   --shadow-2xs: 0px 1px 2px 0px hsl(0, 0%, 0%, 0.05);
   --shadow-xs: 0px 1px 2px 0px hsl(0, 0%, 0%, 0.05);
