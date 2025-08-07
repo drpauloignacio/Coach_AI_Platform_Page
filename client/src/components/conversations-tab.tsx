@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
-import * as d3 from 'd3';
 
 interface Message {
   id: string;
@@ -26,10 +25,7 @@ interface Conversation {
   messages: Message[];
 }
 
-interface CalendarData {
-  date: string;
-  count: number;
-}
+
 
 const conversations: Conversation[] = [
   {
@@ -205,81 +201,29 @@ const conversations: Conversation[] = [
   }
 ];
 
-// Generate calendar data for the past 3 months
-const generateCalendarData = (): CalendarData[] => {
-  const data: CalendarData[] = [];
-  const today = new Date();
-  
-  for (let i = 90; i >= 0; i--) {
-    const date = new Date(today);
-    date.setDate(date.getDate() - i);
-    const count = Math.floor(Math.random() * 50) + 5; // Random between 5-55 messages
-    data.push({
-      date: date.toISOString().split('T')[0],
-      count
-    });
-  }
-  
-  return data;
-};
-
-// Calendar Heatmap Component
-const CalendarHeatmap = () => {
-  const data = generateCalendarData();
-  const cellSize = 12;
-  const width = 800;
-  const height = 120;
-  
-  useEffect(() => {
-    const svg = d3.select('#calendar-heatmap');
-    svg.selectAll('*').remove();
-    
-    const maxCount = d3.max(data, d => d.count) || 0;
-    const colorScale = d3.scaleSequential(d3.interpolateBlues)
-      .domain([0, maxCount]);
-    
-    const weeks = d3.timeWeeks(new Date(data[0].date), new Date(data[data.length - 1].date));
-    
-    const year = svg
-      .attr('width', width)
-      .attr('height', height)
-      .append('g')
-      .attr('transform', 'translate(40, 20)');
-    
-    year.selectAll('.day')
-      .data(data)
-      .enter().append('rect')
-      .attr('class', 'day')
-      .attr('width', cellSize)
-      .attr('height', cellSize)
-      .attr('x', d => {
-        const date = new Date(d.date);
-        return d3.timeWeek.count(d3.timeYear(date), date) * (cellSize + 2);
-      })
-      .attr('y', d => new Date(d.date).getDay() * (cellSize + 2))
-      .attr('fill', d => colorScale(d.count))
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 1)
-      .attr('rx', 2);
-    
-    // Add month labels
-    year.selectAll('.month')
-      .data(d3.timeMonths(new Date(data[0].date), new Date(data[data.length - 1].date)))
-      .enter().append('text')
-      .attr('class', 'month')
-      .attr('x', d => d3.timeWeek.count(d3.timeYear(d), d) * (cellSize + 2))
-      .attr('y', -5)
-      .attr('text-anchor', 'start')
-      .attr('font-size', '10px')
-      .attr('fill', '#666')
-      .text(d => d3.timeFormat('%b')(d));
-      
-  }, []);
+// Message Volume Stats Component
+const MessageVolumeStats = () => {
+  const totalMessages = 12847;
+  const todayMessages = 342;
+  const averageDaily = 156;
   
   return (
-    <div className="mb-4">
-      <h4 className="text-sm font-medium text-gray-700 mb-2">Message Volume</h4>
-      <svg id="calendar-heatmap"></svg>
+    <div className="mb-4 bg-gray-50 rounded-lg p-4">
+      <h4 className="text-sm font-medium text-gray-700 mb-3">Message Volume</h4>
+      <div className="grid grid-cols-1 gap-3">
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-gray-600">Total Messages</span>
+          <span className="font-semibold text-navy">{totalMessages.toLocaleString()}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-gray-600">Today</span>
+          <span className="font-semibold text-green-600">{todayMessages}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-gray-600">Daily Average</span>
+          <span className="font-semibold text-gold">{averageDaily}</span>
+        </div>
+      </div>
     </div>
   );
 };
@@ -324,9 +268,9 @@ export default function ConversationsTab() {
     <div className="h-[800px] bg-white rounded-xl shadow-sm border border-gray-200 flex">
       {/* Left Sidebar */}
       <div className="w-80 border-r border-gray-200 flex flex-col">
-        {/* Calendar Heatmap */}
+        {/* Message Volume Stats */}
         <div className="p-4 border-b border-gray-200">
-          <CalendarHeatmap />
+          <MessageVolumeStats />
         </div>
         
         {/* Search and Filters */}
