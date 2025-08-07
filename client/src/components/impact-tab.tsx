@@ -61,49 +61,50 @@ const testimonials: Testimonial[] = [
 // Gauge component for Active Supporters
 const GaugeMeter = ({ value, max, label }: { value: number; max: number; label: string }) => {
   const percentage = (value / max) * 100;
+  // Calculate angle: -90 degrees is leftmost, +90 degrees is rightmost
   const angle = -90 + (percentage / 100) * 180;
   
   return (
-    <div className="relative w-40 h-20 mx-auto">
-      <svg viewBox="0 0 160 80" className="w-full h-full">
+    <div className="relative w-48 h-28 mx-auto">
+      <svg viewBox="0 0 200 120" className="w-full h-full">
         {/* Background arc */}
         <path
-          d="M 20 60 A 60 60 0 0 1 140 60"
+          d="M 30 80 A 70 70 0 0 1 170 80"
           fill="none"
           stroke="#e5e7eb"
-          strokeWidth="8"
+          strokeWidth="10"
           strokeLinecap="round"
         />
         {/* Progress arc */}
         <motion.path
-          d="M 20 60 A 60 60 0 0 1 140 60"
+          d="M 30 80 A 70 70 0 0 1 170 80"
           fill="none"
           stroke="#C9A34E"
-          strokeWidth="8"
+          strokeWidth="10"
           strokeLinecap="round"
-          strokeDasharray="188.4"
-          initial={{ strokeDashoffset: 188.4 }}
-          animate={{ strokeDashoffset: 188.4 - (188.4 * percentage) / 100 }}
+          strokeDasharray="219.9"
+          initial={{ strokeDashoffset: 219.9 }}
+          animate={{ strokeDashoffset: 219.9 - (219.9 * percentage) / 100 }}
           transition={{ duration: 2, ease: "easeOut" }}
         />
         {/* Needle */}
         <motion.line
-          x1="80"
-          y1="60"
-          x2="80"
-          y2="25"
+          x1="100"
+          y1="80"
+          x2="100"
+          y2="30"
           stroke="#0B0E2C"
-          strokeWidth="2"
+          strokeWidth="3"
           strokeLinecap="round"
-          style={{ transformOrigin: '80px 60px' }}
+          style={{ transformOrigin: '100px 80px' }}
           initial={{ rotate: -90 }}
           animate={{ rotate: angle }}
           transition={{ duration: 2, ease: "easeOut" }}
         />
         {/* Center dot */}
-        <circle cx="80" cy="60" r="3" fill="#0B0E2C" />
+        <circle cx="100" cy="80" r="4" fill="#0B0E2C" />
       </svg>
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-center">
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-center">
         <div className="text-2xl font-bold text-navy">{value}</div>
         <div className="text-xs text-gray-600">{label}</div>
       </div>
@@ -194,7 +195,7 @@ const TestimonialCarousel = () => {
   }, []);
   
   return (
-    <div className="relative h-24 overflow-hidden">
+    <div className="relative h-32 overflow-hidden">
       {testimonials.map((testimonial, index) => (
         <motion.div
           key={index}
@@ -206,7 +207,7 @@ const TestimonialCarousel = () => {
           }}
           transition={{ duration: 0.5 }}
         >
-          <blockquote className="text-sm text-gray-700 italic mb-2">
+          <blockquote className="text-sm text-gray-700 italic mb-3 leading-relaxed">
             "{testimonial.quote}"
           </blockquote>
           <cite className="text-xs text-gray-500">
@@ -297,7 +298,7 @@ export default function ImpactTab() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-80 flex flex-col justify-center"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-96 flex flex-col justify-center"
           >
             <h3 className="text-lg font-semibold text-navy mb-4 text-center">Active Supporters per Mother</h3>
             <GaugeMeter value={7.3} max={10} label="per mother" />
@@ -350,7 +351,7 @@ export default function ImpactTab() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-80 flex flex-col"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-96 flex flex-col"
           >
             <div className="flex items-start space-x-6 h-full">
               <div className="flex-shrink-0">
