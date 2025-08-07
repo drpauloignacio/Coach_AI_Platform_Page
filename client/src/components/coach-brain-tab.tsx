@@ -13,8 +13,8 @@ interface BucketData {
   icon: string;
   recordCount: number;
   lastUpdated: string;
-  logos: string[];
   description: string;
+  trainingDescription: string;
 }
 
 const bucketData: BucketData[] = [
@@ -24,8 +24,8 @@ const bucketData: BucketData[] = [
     icon: "🛠️",
     recordCount: 12847,
     lastUpdated: "2 hours ago",
-    logos: ["👩‍⚕️", "⚽", "🏥"],
-    description: "Daily care routines, feeding schedules, sleep training"
+    description: "Daily care routines, feeding schedules, sleep training",
+    trainingDescription: "Trained on the knowledge of 25 subject matter experts including world-renowned midwives Dr. Heloisa Lessa and Jennie Joseph"
   },
   {
     id: "social",
@@ -33,8 +33,8 @@ const bucketData: BucketData[] = [
     icon: "👥",
     recordCount: 8934,
     lastUpdated: "15 minutes ago",
-    logos: ["👩‍⚕️", "⚽", "🏥"],
-    description: "Community support, peer connections, family dynamics"
+    description: "Community support, peer connections, family dynamics",
+    trainingDescription: "Trained on 267 mother stories and 4,600 message exchanges between mothers"
   },
   {
     id: "clinical",
@@ -42,8 +42,8 @@ const bucketData: BucketData[] = [
     icon: "🏥",
     recordCount: 5623,
     lastUpdated: "1 hour ago",
-    logos: ["👩‍⚕️", "⚽", "🏥"],
-    description: "Medical guidelines, health assessments, safety protocols"
+    description: "Medical guidelines, health assessments, safety protocols",
+    trainingDescription: "Trained on educational content from the world's number 1 hospital, Mayo Clinic"
   }
 ];
 
@@ -88,10 +88,8 @@ function FlipCard({ bucket, delay }: FlipCardProps) {
               </div>
             </div>
             
-            <div className="flex justify-center space-x-2">
-              {bucket.logos.map((logo, index) => (
-                <div key={index} className="text-lg">{logo}</div>
-              ))}
+            <div className="text-xs text-gray-300 text-center leading-relaxed">
+              {bucket.trainingDescription}
             </div>
           </CardContent>
         </Card>
@@ -288,7 +286,7 @@ export default function CoachBrainTab() {
           <Card className="shadow-sm">
             <CardContent className="p-6">
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-navy mb-2">Knowledge Source Buckets</h3>
+                <h3 className="text-xl font-bold text-navy mb-2">Braintrust Knowledge</h3>
                 <p className="text-gray-600 text-sm">
                   Hover over each bucket to see detailed statistics and data sources
                 </p>
