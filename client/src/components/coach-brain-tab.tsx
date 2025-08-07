@@ -266,7 +266,6 @@ export default function CoachBrainTab() {
           </div>
         </CardContent>
       </Card>
-
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
@@ -276,9 +275,7 @@ export default function CoachBrainTab() {
             <CardContent className="p-6">
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-navy mb-2">Braintrust Knowledge</h3>
-                <p className="text-gray-600 text-sm">
-                  Hover over each bucket to see detailed statistics and data sources
-                </p>
+                <p className="text-gray-600 text-sm">Hover over each bucket to see the source of Coach AI's brain power</p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-8">

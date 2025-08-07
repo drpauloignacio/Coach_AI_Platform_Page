@@ -67,7 +67,7 @@ export default function CoachAIPage() {
                     <TabsTrigger
                       key={tab.id}
                       value={tab.id}
-                      className="flex items-center space-x-2 px-4 py-3 rounded-lg font-medium transition-all data-[state=active]:bg-navy data-[state=active]:!text-white data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 bg-[#7a797939]"
+                      className="flex items-center space-x-2 px-4 py-3 rounded-lg font-medium transition-all data-[state=active]:bg-navy data-[state=active]:!text-white data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100"
                     >
                       <span>{tab.icon}</span>
                       <span className="text-sm text-[#000000]">{tab.label}</span>
