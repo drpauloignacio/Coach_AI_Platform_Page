@@ -32,12 +32,12 @@ const taskData: TaskData[] = [
 ];
 
 const rewardData: RewardData[] = [
-  { name: 'Spa Day Voucher', effectiveness: 89, thumbnail: '🧖‍♀️' },
-  { name: 'Coffee Shop Gift Card', effectiveness: 76, thumbnail: '☕' },
-  { name: 'Meal Delivery Credit', effectiveness: 82, thumbnail: '🍽️' },
-  { name: 'Housekeeping Service', effectiveness: 94, thumbnail: '🏠' },
-  { name: 'Babysitting Hours', effectiveness: 91, thumbnail: '👶' },
-  { name: 'Book & Tea Set', effectiveness: 67, thumbnail: '📚' }
+  { name: 'Team Jersey', effectiveness: 92, thumbnail: '👕' },
+  { name: 'Match Tickets', effectiveness: 88, thumbnail: '🎫' },
+  { name: 'Player Meet & Greet', effectiveness: 95, thumbnail: '⭐' },
+  { name: 'Stadium Tour', effectiveness: 79, thumbnail: '🏟️' },
+  { name: 'Signed Soccer Ball', effectiveness: 84, thumbnail: '⚽' },
+  { name: 'VIP Game Experience', effectiveness: 91, thumbnail: '👑' }
 ];
 
 const testimonials: Testimonial[] = [
@@ -154,8 +154,8 @@ const NPSDial = ({ score }: { score: number }) => {
   );
 };
 
-// Count-up animation component
-const CountUpNumber = ({ end, duration = 2 }: { end: number; duration?: number }) => {
+// Count-up animation component for percentages
+const CountUpPercentage = ({ end, duration = 2 }: { end: number; duration?: number }) => {
   const [count, setCount] = useState(0);
   
   useEffect(() => {
@@ -166,7 +166,7 @@ const CountUpNumber = ({ end, duration = 2 }: { end: number; duration?: number }
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
       
-      setCount(Math.floor(progress * end * 10) / 10);
+      setCount(Math.floor(progress * end));
       
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
@@ -178,7 +178,7 @@ const CountUpNumber = ({ end, duration = 2 }: { end: number; duration?: number }
     return () => cancelAnimationFrame(animationFrame);
   }, [end, duration]);
   
-  return <span>{count.toFixed(1)}</span>;
+  return <span>{count}%</span>;
 };
 
 // Testimonial Carousel
@@ -230,9 +230,9 @@ export default function ImpactTab() {
           className="inline-block"
         >
           <div className="text-6xl font-bold text-navy mb-2">
-            <CountUpNumber end={5.2} />
+            <CountUpPercentage end={87} />
           </div>
-          <div className="text-xl text-gray-600">Life Years Generated</div>
+          <div className="text-xl text-gray-600">Tasks Completed</div>
         </motion.div>
       </div>
 
