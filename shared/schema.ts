@@ -81,6 +81,8 @@ export const usersRelations = {
 export const tasksRelations = {
   reward: {
     relation: "one", 
+  }
+}
 export const rewardsRelations = {
   tasks: {
     relation: "many",
