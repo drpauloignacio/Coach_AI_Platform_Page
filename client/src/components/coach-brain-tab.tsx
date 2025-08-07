@@ -251,24 +251,7 @@ export default function CoachBrainTab() {
               </div>
 
               {/* Pipeline Stats */}
-              <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-blue-50 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-600">94%</div>
-                  <div className="text-xs text-blue-800">Accuracy Rate</div>
-                </div>
-                <div className="bg-green-50 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-green-600">1.2s</div>
-                  <div className="text-xs text-green-800">Avg Response</div>
-                </div>
-                <div className="bg-purple-50 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-purple-600">27k</div>
-                  <div className="text-xs text-purple-800">Total Records</div>
-                </div>
-                <div className="bg-orange-50 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-orange-600">99.9%</div>
-                  <div className="text-xs text-orange-800">Uptime</div>
-                </div>
-              </div>
+
             </CardContent>
           </Card>
         </div>
