@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import guardiola from "@assets/generated_images/Pep_Guardiola_coaching_portrait_fd0a5837.png";
 import ancelotti from "@assets/generated_images/Carlo_Ancelotti_coaching_portrait_519941e0.png";
-import mourinho from "@assets/generated_images/José_Mourinho_coaching_portrait_f1df2036.png";
+import mourinho from "@assets/generated_images/Jose_Mourinho_coaching_portrait_f1df2036.png";
 
 interface BucketData {
   id: string;
