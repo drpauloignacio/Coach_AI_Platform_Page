@@ -14,7 +14,7 @@ const sidebarItems = [
   { path: "/health", label: "HEALTH", icon: Heart },
   { path: "/coach-ai", label: "COACH AI", icon: BellRing },
   { path: "/life-years", label: "LIFE YEARS", icon: Calendar },
-  { path: "/payoffs", label: "PAYOFFS", icon: DollarSign },
+  { path: "/payors", label: "PAYORS", icon: DollarSign },
   { path: "/football", label: "FOOTBALL", icon: Users },
 ];
 

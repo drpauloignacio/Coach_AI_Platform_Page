@@ -42,7 +42,6 @@ export default function CoachAIPage() {
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
-      
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navigation */}
         <header className="bg-white border-b border-gray-200 px-6 py-4">
@@ -76,7 +75,7 @@ export default function CoachAIPage() {
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-6">
-                <div className="bg-white bg-opacity-10 rounded-lg px-4 py-2 border border-white border-opacity-20">
+                <div className="rounded-lg px-4 py-2 border border-opacity-20 bg-[#00000061]">
                   <div className="flex items-center space-x-2">
                     <span className="text-gold text-sm">📊</span>
                     <span className="text-white text-sm font-medium">142 Sessions</span>
