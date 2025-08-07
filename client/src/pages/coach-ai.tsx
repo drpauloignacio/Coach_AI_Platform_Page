@@ -73,43 +73,6 @@ export default function CoachAIPage() {
           </div>
         </header>
 
-        {/* Sticky Ribbon */}
-        <div className="sticky top-0 z-10 bg-gradient-to-r from-navy to-navy-light border-b border-gray-200 shadow-sm">
-          <div className="px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-6">
-                <div className="rounded-lg px-4 py-2 border border-opacity-20 bg-[#00000061]">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gold text-sm">📊</span>
-                    <span className="text-white text-sm font-medium">142 Sessions</span>
-                  </div>
-                </div>
-                
-                <div className="bg-white bg-opacity-10 rounded-lg px-4 py-2 border border-white border-opacity-20">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gold text-sm">🎯</span>
-                    <span className="text-white text-sm font-medium">94% Accuracy</span>
-                  </div>
-                </div>
-
-                <div className="bg-white bg-opacity-10 rounded-lg px-4 py-2 border border-white border-opacity-20">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gold text-sm">⚡</span>
-                    <span className="text-white text-sm font-medium">1.2s Avg Response</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Button className="bg-gold hover:bg-gold-light text-navy">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Settings
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Main Content */}
         <main className="flex-1 overflow-auto bg-gray-50">
           <div className="p-6">
