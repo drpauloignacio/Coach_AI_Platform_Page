@@ -4,6 +4,7 @@ import { X, Plus, ChevronDown, ChevronRight, Clock, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { UserRole, LifeStage } from "@shared/types";
 
@@ -35,6 +36,47 @@ const getCategoryBorderColor = (categoryColor: string): string => {
   return categoryMap[categoryColor] || "#6b7280";
 };
 
+const roleChips = [
+  { id: "all", label: "All", role: null },
+  { id: "father", label: "Fathers", role: "father" as UserRole },
+  { id: "family_friend", label: "Family/Friends", role: "family_friend" as UserRole },
+  { id: "fan", label: "Fans", role: "fan" as UserRole }
+];
+
+const lifeStageOptions = [
+  { value: "all", label: "All Stages" },
+  { value: "pregnancy", label: "Pregnancy" },
+  { value: "0-6m", label: "0-6 months" },
+  { value: "6-12m", label: "6-12 months" },
+  { value: "12-24m", label: "12-24 months" },
+  { value: "24m+", label: "24+ months" }
+];
+
+const getRoleIcon = (role: UserRole): string => {
+  switch (role) {
+    case "father":
+      return "👨‍👧‍👦";
+    case "family_friend":
+      return "👥";
+    case "fan":
+      return "⭐";
+    default:
+      return "👤";
+  }
+};
+
+const getRoleColor = (role: UserRole): string => {
+  switch (role) {
+    case "father":
+      return "bg-blue-100 text-blue-800";
+    case "family_friend":
+      return "bg-green-100 text-green-800";
+    case "fan":
+      return "bg-purple-100 text-purple-800";
+    default:
+      return "bg-gray-100 text-gray-800";
+  }
+};
 const mockTasks: Task[] = [
   {
     id: "1",
@@ -180,17 +222,29 @@ function TaskCard({ task, onClick }: TaskCardProps) {
       >
         <CardContent className="p-4">
           <div className="flex items-start justify-between mb-3">
-            <span className="text-2xl">{task.icon}</span>
-            <Badge className={`${task.categoryColor} text-white text-xs`}>
-              +{task.xpPoints} XP
-            </Badge>
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl">{task.icon}</span>
+              <Badge className={`text-xs ${getRoleColor(task.targetRole)}`}>
+                {getRoleIcon(task.targetRole)}
+              </Badge>
+            </div>
+            <div className="flex flex-col items-end space-y-1">
+              <Badge className={`${task.categoryColor} text-white text-xs`}>
+                +{task.xpPoints} XP
+              </Badge>
+              {task.rewardId && (
+                <Badge variant="outline" className="text-xs">
+                  🏆 Reward
+                </Badge>
+              )}
+            </div>
           </div>
           
           <h3 className="font-semibold text-navy mb-3 line-clamp-2">
             {task.taskTitle}
           </h3>
           
-          <div className="flex items-center justify-between text-sm text-gray-600">
+          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
             <div className="flex items-center">
               <Clock className="w-4 h-4 mr-1" />
               {task.avgCompletionMin} min
@@ -199,6 +253,10 @@ function TaskCard({ task, onClick }: TaskCardProps) {
               <Award className="w-4 h-4 mr-1" />
               {task.xpPoints} XP
             </div>
+          </div>
+          
+          <div className="text-xs text-gray-500">
+            Stage: {task.lifeStage}
           </div>
         </CardContent>
       </Card>
@@ -343,14 +401,19 @@ function TaskModal({ task, isOpen, onClose }: TaskModalProps) {
 
 export default function PlaybookTab() {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const [selectedLifeStage, setSelectedLifeStage] = useState<LifeStage | "all">("all");
   const [tasks, setTasks] = useState<Task[]>(mockTasks);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const filteredTasks = selectedCategory === "all" 
-    ? tasks 
-    : tasks.filter(task => task.category === selectedCategory);
+  const filteredTasks = tasks.filter(task => {
+    const categoryMatch = selectedCategory === "all" || task.category === selectedCategory;
+    const roleMatch = selectedRole === null || task.targetRole === selectedRole;
+    const stageMatch = selectedLifeStage === "all" || task.lifeStage === selectedLifeStage;
+    return categoryMatch && roleMatch && stageMatch;
+  });
 
   const handleTaskClick = (task: Task) => {
     setSelectedTask(task);
@@ -375,6 +438,8 @@ export default function PlaybookTab() {
       goal: "Create a positive start to her day and show thoughtfulness",
       whyItMatters: "Small acts of service demonstrate care and help mothers feel valued from the moment they wake up.",
       lifeYearsCredit: "+0.1 years from improved relationship satisfaction and reduced morning stress"
+      targetRole: "father" as UserRole,
+      lifeStage: "0-6m" as LifeStage,
     };
     
     setTasks(prev => [newTask, ...prev]);
@@ -389,8 +454,46 @@ export default function PlaybookTab() {
         <p className="text-gray-600">Guided tasks to help you support the mothers in your life</p>
       </div>
 
+      {/* Filter Bar */}
+      <div className="mb-6 space-y-4">
+        {/* Role Chips */}
+        <div>
+          <h4 className="text-sm font-medium text-gray-700 mb-2">Target Role</h4>
+          <div className="flex flex-wrap gap-2">
+            {roleChips.map((chip) => (
+              <Button
+                key={chip.id}
+                variant={selectedRole === chip.role ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedRole(chip.role)}
+                className={`${selectedRole === chip.role ? 'bg-navy text-white' : ''}`}
+              >
+                {chip.role && getRoleIcon(chip.role)} {chip.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Life Stage Select */}
+        <div>
+          <h4 className="text-sm font-medium text-gray-700 mb-2">Life Stage</h4>
+          <Select value={selectedLifeStage} onValueChange={(value) => setSelectedLifeStage(value as LifeStage | "all")}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="Select life stage" />
+            </SelectTrigger>
+            <SelectContent>
+              {lifeStageOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
       {/* Category Filters */}
       <div className="flex flex-wrap gap-2 mb-6">
+        <h4 className="text-sm font-medium text-gray-700 mb-2 w-full">Category</h4>
         {categories.map((category) => (
           <Button
             key={category.id}
